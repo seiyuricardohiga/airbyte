@@ -25,14 +25,14 @@ jobs:
             -Dsonar.verbose=true
             -Dsonar.language=py
             -Dsonar.sourceEncoding=UTF-8
+            -Dsonar.python.coverage.reportPaths=test_reports/*.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
-      - name: SonarQube Quality Gate check
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          scanMetadataReportFile: target/sonar/report-task.txt
+#      - name: SonarQube Quality Gate check
+#        uses: sonarsource/sonarqube-quality-gate-action@master
+#        timeout-minutes: 5
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        with:
+#          scanMetadataReportFile: target/sonar/report-task.txt
