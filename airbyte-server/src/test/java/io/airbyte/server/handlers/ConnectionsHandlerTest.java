@@ -152,7 +152,7 @@ class ConnectionsHandlerTest {
         .withName("destination-test")
         .withDestinationDefinitionId(UUID.randomUUID());
     when(configRepository.getStandardSync(standardSync.getConnectionId())).thenReturn(standardSync);
-    when(configRepository.getSourceDefinitionFromConnection(standardSync.getConnectionId())).thenReturn(sourceDefinition);
+    when(configRepository.getSourceDefinitionFromConnection(standardSync.getConnectionId(), false)).thenReturn(sourceDefinition);
     when(configRepository.getDestinationDefinitionFromConnection(standardSync.getConnectionId())).thenReturn(destinationDefinition);
 
     final AirbyteCatalog catalog = ConnectionHelpers.generateBasicApiCatalog();
@@ -219,7 +219,7 @@ class ConnectionsHandlerTest {
         .withName("destination-test")
         .withDestinationDefinitionId(UUID.randomUUID());
     when(configRepository.getStandardSync(standardSync.getConnectionId())).thenReturn(standardSync);
-    when(configRepository.getSourceDefinitionFromConnection(standardSync.getConnectionId())).thenReturn(sourceDefinition);
+    when(configRepository.getSourceDefinitionFromConnection(standardSync.getConnectionId(), false)).thenReturn(sourceDefinition);
     when(configRepository.getDestinationDefinitionFromConnection(standardSync.getConnectionId())).thenReturn(destinationDefinition);
 
     when(configRepository.getSourceConnection(sourceIdBad))
@@ -409,7 +409,7 @@ class ConnectionsHandlerTest {
         .thenReturn(standardSync);
     when(configRepository.getStandardSync(standardSync2.getConnectionId()))
         .thenReturn(standardSync2);
-    when(configRepository.getStandardSourceDefinition(source.getSourceDefinitionId()))
+    when(configRepository.getStandardSourceDefinition(source.getSourceDefinitionId(), false))
         .thenReturn(sourceDefinition);
     when(configRepository.getStandardDestinationDefinition(destination.getDestinationDefinitionId()))
         .thenReturn(destinationDefinition);
@@ -550,7 +550,7 @@ class ConnectionsHandlerTest {
         .withName("destination-test")
         .withDestinationDefinitionId(UUID.randomUUID());
     when(configRepository.getStandardSync(standardSync.getConnectionId())).thenReturn(standardSync);
-    when(configRepository.getSourceDefinitionFromConnection(standardSync.getConnectionId())).thenReturn(sourceDefinition);
+    when(configRepository.getSourceDefinitionFromConnection(standardSync.getConnectionId(), false)).thenReturn(sourceDefinition);
     when(configRepository.getDestinationDefinitionFromConnection(standardSync.getConnectionId())).thenReturn(destinationDefinition);
 
     final AirbyteCatalog catalog = ConnectionHelpers.generateBasicApiCatalog();
