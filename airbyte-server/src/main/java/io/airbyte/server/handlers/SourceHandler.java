@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
 import io.airbyte.api.model.ConnectionRead;
 import io.airbyte.api.model.SourceCreate;
+import io.airbyte.api.model.SourceDefinitionIdRequestBody;
 import io.airbyte.api.model.SourceIdRequestBody;
 import io.airbyte.api.model.SourceRead;
 import io.airbyte.api.model.SourceReadList;
@@ -119,6 +120,24 @@ public class SourceHandler {
 
     for (final SourceConnection sci : configRepository.listSourceConnection()) {
       if (!sci.getWorkspaceId().equals(workspaceIdRequestBody.getWorkspaceId())) {
+        continue;
+      }
+      if (sci.getTombstone()) {
+        continue;
+      }
+
+      reads.add(buildSourceRead(sci.getSourceId()));
+    }
+
+    return new SourceReadList().sources(reads);
+  }
+
+  public SourceReadList listSourcesForSourceDefinition(final SourceDefinitionIdRequestBody sourceDefinitionIdRequestBody)
+      throws JsonValidationException, IOException, ConfigNotFoundException {
+    final List<SourceRead> reads = Lists.newArrayList();
+
+    for (final SourceConnection sci : configRepository.listSourceConnection()) {
+      if (!sci.getSourceDefinitionId().equals(sourceDefinitionIdRequestBody.getSourceDefinitionId())) {
         continue;
       }
       if (sci.getTombstone()) {
