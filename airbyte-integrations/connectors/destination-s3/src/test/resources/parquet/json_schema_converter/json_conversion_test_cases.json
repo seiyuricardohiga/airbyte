@@ -83,7 +83,7 @@
             {
               "type": "record",
               "name": "user",
-              "namespace": "",
+              "namespace": "namespace2",
               "fields": [
                 {
                   "name": "first_name",
@@ -452,7 +452,7 @@
             {
               "type": "record",
               "name": "user",
-              "namespace": "",
+              "namespace": "namespace9",
               "fields": [
                 {
                   "name": "created_at",
@@ -772,6 +772,151 @@
       "date_time_field": 1609459261000000,
       "date_field": 18628,
       "time_field": 44581541000,
+      "_airbyte_additional_properties": null
+    }
+  },
+  {
+    "schemaName": "schema_with_the_same_object_names",
+    "namespace": "namespace16",
+    "appendAirbyteFields": false,
+    "jsonSchema": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "object",
+          "properties": {
+            "login": {
+              "type": ["null", "string"]
+            }
+          }
+        },
+        "commit": {
+          "type": ["null", "object"],
+          "properties": {
+            "author": {
+              "type": ["null", "object"],
+              "properties": {
+                "name": {
+                  "type": ["null", "string"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "jsonObject": {
+      "author": {
+        "login": "test"
+      },
+      "commit": {
+          "author": {
+            "name": "Test Author"
+          }
+        }
+      },
+    "avroSchema": {
+      "type": "record",
+      "name": "schema_with_the_same_object_names",
+      "namespace": "namespace16",
+      "fields": [
+        {
+          "name": "author",
+          "type": [
+            "null",
+            {
+              "type": "record",
+              "name": "author",
+              "namespace": "namespace16",
+              "fields": [
+                {
+                  "name": "login",
+                  "type": ["null", "string"],
+                  "default": null
+                },
+                {
+                  "name": "_airbyte_additional_properties",
+                  "type": [
+                    "null",
+                    { "type": "map", "values": "string" }
+                  ],
+                  "default": null
+                }
+              ]
+            }
+          ],
+          "default": null
+        },
+        {
+          "name": "commit",
+          "type": [
+            "null",
+            {
+              "type": "record",
+              "name": "commit",
+              "namespace": "namespace16",
+              "fields": [
+                {
+                  "name": "author",
+                  "type": [
+                    "null",
+                    {
+                      "type": "record",
+                      "name": "author",
+                      "namespace": "namespace16.commit",
+                      "fields": [
+                        {
+                          "name": "name",
+                          "type": ["null", "string"],
+                          "default": null
+                        },
+                        {
+                          "name": "_airbyte_additional_properties",
+                          "type": [
+                            "null",
+                            { "type": "map", "values": "string" }
+                          ],
+                          "default": null
+                        }
+                      ]
+                    }
+                  ],
+                  "default": null
+                },
+                {
+                  "name": "_airbyte_additional_properties",
+                  "type": [
+                    "null",
+                    { "type": "map", "values": "string" }
+                  ],
+                  "default": null
+                }
+              ]
+            }
+          ],
+          "default": null
+        },
+        {
+          "name": "_airbyte_additional_properties",
+          "type": [
+            "null", { "type": "map", "values": "string" }
+          ],
+          "default": null
+        }
+      ]
+    },
+    "avroObject": {
+      "author": {
+        "login": "test",
+        "_airbyte_additional_properties": null
+      },
+      "commit": {
+        "author": {
+          "name": "Test Author",
+          "_airbyte_additional_properties": null
+        },
+        "_airbyte_additional_properties": null
+      },
       "_airbyte_additional_properties": null
     }
   }
