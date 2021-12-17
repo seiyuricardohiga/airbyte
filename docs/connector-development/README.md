@@ -127,8 +127,8 @@ Once you've finished iterating on the changes to a connector as specified in its
    * `airbyte-config/init/src/main/resources/seed/source_definitions.yaml` if it is a source
    * `airbyte-config/init/src/main/resources/seed/destination_definitions.yaml` if it is a destination.
    
-   Then run the commend `./gradlew :airbyte-config:init:processResources` to generate the seed spec yaml files, and commit the changes to the PR. See [this readme](https://github.com/airbytehq/airbyte/tree/a534bb2a8f29b20e3cc7c52fef1bc3c34783695d/airbyte-config/specs) for more information.
-   
+   Then run the commend `./gradlew :airbyte-config:init:processResources` to generate the seed spec yaml files, and commit the changes to the PR. See [this readme](https://github.com/airbytehq/airbyte/tree/a534bb2a8f29b20e3cc7c52fef1bc3c34783695d/airbyte-config/specs) for more information. You may need to use `git commit --no-verify` to skip the [auto-formatting hooks](https://github.com/airbytehq/airbyte/blob/33e0efcf66aa32f60a140e94a0ba0f2f9fc33284/.pre-commit-config.yaml#L46), as otherwise the build will fail.
+
 5. The new version of the connector is now available for everyone who uses it. Thank you!
 
 ## Using credentials in CI
