@@ -29,7 +29,7 @@ Before building a new connector, review [Airbyte's data protocol specification](
 To add a new connector you need to:
 
 1. Implement & Package your connector in an Airbyte Protocol compliant Docker image
-2. Add integration tests for your connector. At a minimum, all connectors must pass [Airbyte's standard test suite](testing-connectors/), but you can also add your own tests. 
+2. Add integration tests for your connector. At a minimum, all connectors must pass [Airbyte's standard test suite](testing-connectors/), but you can also add your own tests.
 3. Document how to build & test your connector
 4. Publish the Docker image containing the connector
 
@@ -65,7 +65,7 @@ Search the generated directory for "TODO"s and follow them to implement your con
 
 * [Speedrun: Building a HTTP source with the CDK](tutorials/cdk-speedrun.md)
 * [Building a HTTP source with the CDK](tutorials/cdk-tutorial-python-http/)
-* [Building a Python source](tutorials/building-a-python-source.md) 
+* [Building a Python source](tutorials/building-a-python-source.md)
 * [Building a Python destination](tutorials/building-a-python-destination.md)
 * [Building a Java destination](tutorials/building-a-java-destination.md)
 
@@ -83,14 +83,14 @@ If you're writing in Python or Java, skip this section -- it is provided automat
 
 If you're writing in another language, please document the commands needed to:
 
-1. Build your connector docker image \(usually this is just `docker build .` but let us know if there are necessary flags, gotchas, etc..\) 
+1. Build your connector docker image \(usually this is just `docker build .` but let us know if there are necessary flags, gotchas, etc..\)
 2. Run any unit or integration tests _in a Docker image_.
 
 Your integration and unit tests must be runnable entirely within a Docker image. This is important to guarantee consistent build environments.
 
 When you submit a PR to Airbyte with your connector, the reviewer will use the commands you provide to integrate your connector into Airbyte's build system as follows:
 
-1. `:airbyte-integrations:connectors:source-<name>:build` should run unit tests and build the integration's Docker image 
+1. `:airbyte-integrations:connectors:source-<name>:build` should run unit tests and build the integration's Docker image
 2. `:airbyte-integrations:connectors:source-<name>:integrationTest` should run integration tests including Airbyte's Standard test suite.
 
 ### 4. Publish the connector
@@ -110,14 +110,14 @@ The steps for updating an existing connector are the same as for building a new 
 
 Once you've finished iterating on the changes to a connector as specified in its `README.md`, follow these instructions to ship the new version of the connector with Airbyte out of the box.
 
-1. Bump the version in the `Dockerfile` of the connector \(`LABEL io.airbyte.version=X.X.X`\). 
+1. Bump the version in the `Dockerfile` of the connector \(`LABEL io.airbyte.version=X.X.X`\).
 2. Submit a PR containing the changes you made.
 3. One of Airbyte maintainers will review the change and publish the new version of the connector to Docker hub. Triggering tests and publishing connectors can be done by leaving a comment on the PR with the following format \(the PR must be from the Airbyte repo, not a fork\):
 
    ```text
    # to run integration tests for the connector
    # Example: /test connector=connectors/source-hubspot
-   /test connector=(connectors|bases)/<connector_name> 
+   /test connector=(connectors|bases)/<connector_name>
 
    # to run integration tests and publish the connector
    # Example: /publish connector=connectors/source-hubspot
@@ -126,7 +126,7 @@ Once you've finished iterating on the changes to a connector as specified in its
 4. Update the connector definition in the Airbyte connector index to use the new version:
    * `airbyte-config/init/src/main/resources/seed/source_definitions.yaml` if it is a source
    * `airbyte-config/init/src/main/resources/seed/destination_definitions.yaml` if it is a destination.
-   
+
    Then run the commend `./gradlew :airbyte-config:init:processResources` to generate the seed spec yaml files, and commit the changes to the PR. See [this readme](https://github.com/airbytehq/airbyte/tree/a534bb2a8f29b20e3cc7c52fef1bc3c34783695d/airbyte-config/specs) for more information. You may need to use `git commit --no-verify` to skip the [auto-formatting hooks](https://github.com/airbytehq/airbyte/blob/33e0efcf66aa32f60a140e94a0ba0f2f9fc33284/.pre-commit-config.yaml#L46), as otherwise the build will fail.
 
 5. The new version of the connector is now available for everyone who uses it. Thank you!
