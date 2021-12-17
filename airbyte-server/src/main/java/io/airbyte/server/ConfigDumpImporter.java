@@ -409,7 +409,7 @@ public class ConfigDumpImporter {
               // make sure connector definition exists
               try {
                 final StandardSourceDefinition sourceDefinition =
-                    configRepository.getStandardSourceDefinition(sourceConnection.getSourceDefinitionId(), false);
+                    configRepository.getStandardSourceDefinition(sourceConnection.getSourceDefinitionId());
                 if (sourceDefinition == null) {
                   return;
                 }
