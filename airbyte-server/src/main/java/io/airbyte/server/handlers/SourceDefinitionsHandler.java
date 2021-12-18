@@ -158,7 +158,7 @@ public class SourceDefinitionsHandler {
     // Delete sources first in case a failure occurs mid-operation.
 
     final StandardSourceDefinition persistedSourceDefinition =
-        configRepository.getStandardSourceDefinition(sourceDefinitionIdRequestBody.getSourceDefinitionId(), false);
+        configRepository.getStandardSourceDefinition(sourceDefinitionIdRequestBody.getSourceDefinitionId());
 
     for (final SourceRead sourceRead : sourceHandler.listSourcesForSourceDefinition(sourceDefinitionIdRequestBody).getSources()) {
       sourceHandler.deleteSource(sourceRead);
