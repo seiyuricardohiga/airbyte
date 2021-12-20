@@ -57,7 +57,7 @@ TASK_COMMANDS: Dict[str, List[str]] = {
         f"pip install {os.path.join(CONNECTORS_DIR, os.pardir, 'bases', 'source-acceptance-test')}",
         "pip install .[tests]",
         "pip install pytest-cov",
-        f"pytest -v --cov={{source_path}} unit_tests",
+        f"pytest -v --cov={{source_path}} --cov-report=xml unit_tests",
     ],
 }
 
