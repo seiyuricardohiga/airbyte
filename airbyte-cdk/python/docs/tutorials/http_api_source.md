@@ -274,7 +274,7 @@ Having created this stream in code, we'll put a file `exchange_rates.json` in th
 With `.json` schema file in place, let's see if the connector can now find this schema and produce a valid catalog: 
 
 ```
-python main_dev.py discover --config sample_files/config.json
+python main.py discover --config sample_files/config.json
 ```
 
 you should see some output like: 
@@ -434,7 +434,7 @@ class ExchangeRates(HttpStream):
         self.start_date = start_date
 ```
 
-Declaring the `cursor_field` informs the framework that this stream now supports incremental sync. The next time you run `python main_dev.py discover --config sample_files/config.json` you'll find that the `supported_sync_modes` field now also contains `incremental`.
+Declaring the `cursor_field` informs the framework that this stream now supports incremental sync. The next time you run `python main.py discover --config sample_files/config.json` you'll find that the `supported_sync_modes` field now also contains `incremental`.
 
 But we're not quite done with supporting incremental, we have to actually emit state! We'll structure our state object very simply: it will be a `dict` whose single key is `'date'` and value is the date of the last day we synced data from. For example, `{'date': '2021-04-26'}` indicates the connector previously read data up until April 26th and therefore shouldn't re-read anything before April 26th.
 
