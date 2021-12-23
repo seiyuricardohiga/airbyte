@@ -122,7 +122,7 @@ public abstract class AbstractJdbcCompatibleSourceOperations<Datatype> implement
     // https://www.cis.upenn.edu/~bcpierce/courses/629/jdkdocs/guide/jdbc/getstart/mapping.doc.html
     final Timestamp t = resultSet.getTimestamp(index);
     final java.util.Date d = new java.util.Date(t.getTime() + (t.getNanos() / 1000000));
-    node.put(columnName, DataTypeUtils.toISO8601String(d));
+    node.put(columnName, DataTypeUtils.toISO8601StringWithMilliseconds(d));
   }
 
   protected void putBinary(final ObjectNode node, final String columnName, final ResultSet resultSet, final int index) throws SQLException {
